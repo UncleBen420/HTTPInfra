@@ -4,42 +4,39 @@ var app = express();
 var chance = new Chance();
 
 app.get('/', function(req, res){
-	res.send( generateStudents());
+	res.send( generatePhoneNumber());
 });
 
 app.listen(3000, function(){
 	console.log('Accepting HTTP requests on port 3000.');
 });
 
-function generateStudents(){
-	var numberOFStudents = chance.integer({
+function generatePhoneNumber(){
+	var numberPhoneNum = chance.integer({
 		min:0,
 		max:10
 	});
-	console.log(numberOFStudents);
-	var students = [];
-	for(var i = 0; i < numberOFStudents ; i++){
+	console.log(numberPhoneNum);
+	var phones = [];
+	for(var i = 0; i < numberPhoneNum ; i++){
+		
+		
 		
 		var gender = chance.gender();
 		var birthYear = chance.year({
 			min: 1986,
 			max: 1996
 		});
-		students.push({
+		phones.push({
 			
 			
-			firstName: chance.first({
-				gender: gender
-			}),
+			firstName: chance.first(),
 			lastName: chance.last(),
-			gender: gender,
-			birthday: chance.birthday({
-				year: birthYear
-			})	
+			phoneNumber: chance.phone()	
 		});
 		
 	};
 	
-	console.log(students);
-	return students;	
+	console.log(phones);
+	return phones;	
 }
